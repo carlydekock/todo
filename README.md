@@ -1,4 +1,26 @@
-# Getting Started with Create React App
+# Lab 31: Hooks API
+
+To Do List Manager Phase 1: Begin the build of an application designed for creating and organizing a “To Do” list in your browser.
+
+## Author: Carly Dekock
+
+### Link to GitHub repo [here](https://github.com/carlydekock/todo.git)
+
+### Link to PR [here](https://github.com/carlydekock/todo/pull/1)
+
+## Resources
+
+- React Bootstrap [docs](https://react-bootstrap.github.io/components/forms/)
+
+## Collaborators
+
+- Worked at a lab table with Jason D, Jason Q, Nick M, and Seid
+
+## UML
+
+![image](assets/UML.png)
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
