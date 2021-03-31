@@ -13,6 +13,8 @@ To Do List Manager Phase 2: Connecting the To Do Application to an external API 
 ## Resources
 
 - React Bootstrap [docs](https://react-bootstrap.github.io/components/forms/)
+- Axios [docs](https://www.npmjs.com/package/axios)
+- Kory (TA)
 
 ## Collaborators
 
