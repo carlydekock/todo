@@ -1,12 +1,14 @@
-# Lab 31: Hooks API
+# Lab 32: Custom Hooks
 
 To Do List Manager Phase 1: Begin the build of an application designed for creating and organizing a “To Do” list in your browser.
+
+To Do List Manager Phase 2: Connecting the To Do Application to an external API and Database
 
 ## Author: Carly Dekock
 
 ### Link to GitHub repo [here](https://github.com/carlydekock/todo.git)
 
-### Link to PR [here](https://github.com/carlydekock/todo/pull/1)
+### Link to PR [here](https://github.com/carlydekock/todo/pull/2)
 
 ## Resources
 
