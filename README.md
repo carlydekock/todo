@@ -1,20 +1,24 @@
-# Lab 32: Custom Hooks
+# Lab 33: Context API
 
 To Do List Manager Phase 1: Begin the build of an application designed for creating and organizing a “To Do” list in your browser.
 
 To Do List Manager Phase 2: Connecting the To Do Application to an external API and Database
 
+To Do List Manager Phase 3: Add some configuration settings to the application
+In this phase, we’ll be adding some top-level settings for the application, so that the user can make some display choices that the app will use by default.
+
 ## Author: Carly Dekock
 
 ### Link to GitHub repo [here](https://github.com/carlydekock/todo.git)
 
-### Link to PR [here](https://github.com/carlydekock/todo/pull/2)
+### Link to PR [here](https://github.com/carlydekock/todo/pull/3)
 
 ## Resources
 
 - React Bootstrap [docs](https://react-bootstrap.github.io/components/forms/)
 - Axios [docs](https://www.npmjs.com/package/axios)
 - Kory (TA)
+- Tip from Kory troubleshooting an error: // eslint-disable-next-line react-hooks/exhaustive-deps
 
 ## Collaborators
 
