@@ -2,14 +2,15 @@ import React from 'react';
 // import ListGroup from 'react-bootstrap/ListGroup';
 import Toast from 'react-bootstrap/Toast';
 import Badge from 'react-bootstrap/Badge';
-// import Pagination from 'react-bootstrap/Pagination';
-import { useContext } from 'react';
+import Pagination from 'react-bootstrap/Pagination';
+import { useState, useContext } from 'react';
 import { SettingsContext } from '../../context/Settings.js';
 // import { PaginatedList } from 'react-paginated-list';
 
 export default function TodoList(props) {
 
   const context = useContext(SettingsContext);
+  const [currentPage, setCurrentPage] = useState(context.startingPage);
   const maxItems = context.itemCount;
 
   const styles = {
@@ -28,12 +29,29 @@ export default function TodoList(props) {
     }
   });
   const filteredList = sortedList.filter((item) => !item.complete);
-
+  const filteredIncompleteList = sortedList.filter((item) => item.complete);
   // console.log(sortedList)
+  const allItemsList = [...filteredList, ...filteredIncompleteList]
 
+  const numberOfPages = Math.ceil(allItemsList.length / maxItems);
+  const indexOfLastPost = currentPage * maxItems;
+  const indexOfFirstPost = indexOfLastPost - maxItems;
+  const currentPosts = allItemsList.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginateNext = (pageNumber) => setCurrentPage(pageNumber);
+
+  const pageNumbers = [];
+  const activePage = currentPage;
+  for (let number = 1; number < numberOfPages; number++){
+    pageNumbers.push(
+      <Pagination.Item key={number} activePage={number === activePage} onClick={() => paginateNext(number)}>
+      {number}
+    </Pagination.Item>,
+    )
+  }
   return (
     <>
-      {props.list.map((item) => (
+      {currentPosts.map((item) => (
         <Toast key={item._id} onClose={() => props.handleDelete(item._id)}>
           <Toast.Header>
             <Badge
@@ -52,6 +70,9 @@ export default function TodoList(props) {
           </Toast.Body>
         </Toast>
       ))}
+      <Pagination>
+        {pageNumbers}
+      </Pagination>
     </>
   )
 
