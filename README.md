@@ -19,6 +19,7 @@ In this phase, we’ll be adding some top-level settings for the application, so
 - Axios [docs](https://www.npmjs.com/package/axios)
 - Kory (TA)
 - Tip from Kory troubleshooting an error: // eslint-disable-next-line react-hooks/exhaustive-deps
+- React tutorial on Pagination [here](https://www.youtube.com/watch?v=IYCa1F-OWmk&ab_channel=TraversyMedia)
 
 ## Collaborators
 
