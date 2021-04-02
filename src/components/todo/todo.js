@@ -5,6 +5,7 @@ import TodoList from './list.js';
 import axios from 'axios';
 import useAjax from '../../hooks/useAjax.js';
 import './todo.scss';
+import Header from '../header/header.js';
 
 const todoAPI = 'https://api-js401.herokuapp.com/api/v1/todo';
 
@@ -170,8 +171,7 @@ export default function ToDo(props) {
 
   return (
     <>
-      <header>
-      </header>
+      <Header />
       <main>
         <h2>
           To Do List Manager ({list.filter(item => !item.complete).length})
