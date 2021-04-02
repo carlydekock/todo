@@ -7,19 +7,25 @@ import useAjax from '../../hooks/useAjax.js';
 import './todo.scss';
 import Header from '../header/header.js';
 import SettingsProvider from '../../context/Settings.js';
-import Login from '../../components/auth/Login.js';
+// import Login from '../../components/auth/Login.js';
 import Auth from '../../components/auth/Auth.js';
 import AuthProvider from '../../context/AuthProvider.js';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthProvider.js';
+import useForm from '../../hooks/useForm.js';
 
 
 const todoAPI = 'https://api-js401.herokuapp.com/api/v1/todo';
+
+function If({ condition, children }) {
+  return condition ? children : null;
+}
+
 
 export default function ToDo(props) {
 
   const [list, setList] = useState([]);
   document.title = `To Do List: ${list.filter(item => !item.complete).length}`;
-
-  // [getItems, postItems, putItems] = useAjax();
 
   const [request, response] = useAjax();
   const [data, setData] = useState();
@@ -31,6 +37,91 @@ export default function ToDo(props) {
     })
     setList(request.data.results)
   };
+
+
+  useEffect(() => {
+    setData(response);
+  }, [response]);
+
+  const postItems = (input) => {
+    let options = {
+      url: todoAPI,
+      method: 'post',
+      mode: 'cors',
+      headers: { 'Context-Type': 'application/json' },
+      data: input,
+    }
+    request(options);
+  }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const putItems = (id) => {
+
+    const itemToPut = list.filter(i => i._id === id)[0]
+    if (itemToPut._id) {
+      let options = {
+        url: `${todoAPI}/${id}`,
+        method: 'put',
+        mode: 'cors',
+        headers: { 'Context-Type': 'application/json' },
+        data: { complete: !itemToPut.complete }
+      }
+      request(options);
+    }
+  }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const deleteItems = (id) => {
+
+    let options = {
+      url: `${todoAPI}/${id}`,
+      method: 'delete',
+      mode: 'cors',
+      headers: { 'Context-Type': 'application/json' },
+    }
+    request(options);
+  }
+
+  useEffect(() => {
+    getItems();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [putItems, deleteItems]);
+
+
+  return (
+    <>
+      <AuthProvider>
+        <SettingsProvider>
+          <Header />
+          <Auth capability="read">
+            {/* <p>You are authorized!!</p> */}
+          <main>
+            <h2>
+              To Do List Manager ({list.filter(item => !item.complete).length})
+            </h2>
+            <section className="todo">
+              <div>
+                <TodoForm addItem={postItems} />
+              </div>
+              <div>
+                <TodoList
+                  list={list}
+                  handleComplete={putItems}
+                  handleDelete={deleteItems}
+                  />
+              </div>
+            </section>
+          </main>
+          </Auth>
+        </SettingsProvider>
+      </AuthProvider>
+    </>
+  );
+}
+// useEffect(() => {
+  //   request({url: 'https://api-js401.herokuapp.com/api/v1/todo', method: 'GET'});
+  //   setData(response);
+  // }, [response, request, setData])
 
   // const getItems = () => {
   //   let options = {
@@ -54,99 +145,7 @@ export default function ToDo(props) {
   //     method: 'get',
   //   });
   // });
-
-
-  useEffect(() => {
-    setData(response);
-  }, [response]);
-
-  const postItems = (input) => {
-    let options = {
-      url: todoAPI,
-      method: 'post',
-      mode: 'cors',
-      headers: { 'Context-Type': 'application/json' },
-      data: input,
-    }
-    request(options);
-  }
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const putItems = (id) => {
-    
-    const itemToPut = list.filter(i => i._id === id)[0]
-    if (itemToPut._id) {
-      let options = {
-        url: `${todoAPI}/${id}`,
-        method: 'put',
-        mode: 'cors',
-        headers: { 'Context-Type': 'application/json' },
-        data: {complete: !itemToPut.complete}
-      }
-      // getItems();
-      request(options);
-    }
-  }
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const deleteItems = (id) => {
-    
-    let options = {
-      url: `${todoAPI}/${id}`,
-      method: 'delete',
-      mode: 'cors',
-      headers: { 'Context-Type': 'application/json' },
-    }
-    // getItems();
-    request(options);
-  }
-
-  useEffect(() => {
-    getItems();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [putItems, deleteItems]);
-
-  // useEffect(() => {
-  //   request({url: 'https://api-js401.herokuapp.com/api/v1/todo', method: 'GET'});
-  //   setData(response);
-  // }, [response, request, setData])
-
-  // // useEffect(getItems, []);
-  // useEffect(() => {
-  //   getItems();
-  // }, []);
-
-  
-
-  return (
-    <>
-    <AuthProvider>
-    <SettingsProvider>
-      <Header />
-      <Login />
-        <Auth capability="read">
-          <p>You are authorized!!</p>
-        </Auth>
-      <main>
-        <h2>
-          To Do List Manager ({list.filter(item => !item.complete).length})
-        </h2>
-        <section className="todo">
-          <div>
-            <TodoForm addItem={postItems} />
-          </div>
-          <div>
-            <TodoList
-              list={list}
-              // handleComplete={toggleComplete}
-              handleComplete={putItems}
-              handleDelete={deleteItems}
-            />
-          </div>
-        </section>
-      </main>
-      </SettingsProvider>
-      </AuthProvider>
-    </>
-  );
-}
+// // useEffect(getItems, []);
+// useEffect(() => {
+//   getItems();
+// }, []);

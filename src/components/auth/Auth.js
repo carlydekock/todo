@@ -23,7 +23,7 @@ function Auth({ capability, children }) {
         {children}
       </If>
       <If condition={!isAuthorized(capability)}>
-        <h3>No Authorized</h3>
+        <h3>Not Authorized</h3>
       </If>
     </>
   )
