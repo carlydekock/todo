@@ -7,7 +7,7 @@ function SettingsProvider(props) {
   //display or hide completed items (boolean)
   const [displayItems, setDisplayItems] = useState('false');
   //number of items to display per screen (number)
-  const [itemCount, setItemCount] = useState(10);
+  const [itemCount, setItemCount] = useState(5);
   //default sort field (string)
   const [sortField, setSortField] = useState('difficulty');
   const [startingPage, setStartingPage] = useState(1);
@@ -20,7 +20,7 @@ function SettingsProvider(props) {
     changeDisplayItems: setDisplayItems,
     changeItemCount: setItemCount,
     changeSortField: setSortField,
-    changeStartingPage: setStartingPage,
+    changePage: setStartingPage,
   }
 
   return (

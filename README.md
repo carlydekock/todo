@@ -1,4 +1,4 @@
-# Lab 33: Context API
+# Lab 34: ```<Login />``` and ```<Auth />```
 
 To Do List Manager Phase 1: Begin the build of an application designed for creating and organizing a “To Do” list in your browser.
 
@@ -7,11 +7,13 @@ To Do List Manager Phase 2: Connecting the To Do Application to an external API 
 To Do List Manager Phase 3: Add some configuration settings to the application
 In this phase, we’ll be adding some top-level settings for the application, so that the user can make some display choices that the app will use by default.
 
+To Do List Manager Phase 4: Adding security and access controls to the application. In this final phase, we’ll be requiring that users be logged in, in order to see the to do items. Additionally, based on their user type, they will be allowed (or denied) to perform actions such as editing or deleting them.
+
 ## Author: Carly Dekock
 
 ### Link to GitHub repo [here](https://github.com/carlydekock/todo.git)
 
-### Link to PR [here](https://github.com/carlydekock/todo/pull/3)
+### Link to PR [here](https://github.com/carlydekock/todo/pull/5)
 
 ## Resources
 
