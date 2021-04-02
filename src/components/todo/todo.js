@@ -6,6 +6,11 @@ import axios from 'axios';
 import useAjax from '../../hooks/useAjax.js';
 import './todo.scss';
 import Header from '../header/header.js';
+import SettingsProvider from '../../context/Settings.js';
+import Login from '../../components/auth/Login.js';
+import Auth from '../../components/auth/Auth.js';
+import AuthProvider from '../../context/AuthProvider.js';
+
 
 const todoAPI = 'https://api-js401.herokuapp.com/api/v1/todo';
 
@@ -100,89 +105,36 @@ export default function ToDo(props) {
     getItems();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [putItems, deleteItems]);
-  // const deleteItems = async (id) => {
-
-  //   let request = await axios({
-  //     method: 'delete',
-  //     url: `${todoAPI}/${id}`,
-  //   })
-  //   getItems();
-  //   return request;
-  // }
-
 
   // useEffect(() => {
   //   request({url: 'https://api-js401.herokuapp.com/api/v1/todo', method: 'GET'});
   //   setData(response);
   // }, [response, request, setData])
-  
-  // const getItems = async () => {
-  //   let request = await axios({
-  //     method: 'get',
-  //     url: todoAPI
-  //   })
-  //   setList(request.data.results)
-  // };
 
   // // useEffect(getItems, []);
   // useEffect(() => {
   //   getItems();
   // }, []);
 
-  // const postItems = async (input) => {
-  //   let request = await axios({
-  //     method: 'post',
-  //     url: todoAPI,
-  //     data: input
-  //   })
-  //   getItems();
-  //   console.log(request);
-  //   return request;
-  // };
-
-  // const putItems = async (id) => {
-
-  //   let itemToPut = list.filter(i => i._id === id)[0];
-    
-  //   if (itemToPut._id) {
-  //     // itemToPut.complete = !itemToPut.complete;
-  //     // let toggle = itemToPut.complete;
-  //     let request = await axios({
-  //       method: 'put',
-  //       url: `${todoAPI}/${id}`,
-  //       data: {complete: !itemToPut.complete},
-  //     })
-  //     getItems();
-  //     return request;
-  //   }
-  // }
-
-  // const deleteItems = async (id) => {
-
-  //   let request = await axios({
-  //     method: 'delete',
-  //     url: `${todoAPI}/${id}`,
-  //   })
-  //   getItems();
-  //   return request;
-  // }
-
-
+  
 
   return (
     <>
+    <AuthProvider>
+    <SettingsProvider>
       <Header />
+      <Login />
+        <Auth capability="read">
+          <p>You are authorized!!</p>
+        </Auth>
       <main>
         <h2>
           To Do List Manager ({list.filter(item => !item.complete).length})
         </h2>
-
         <section className="todo">
-
           <div>
             <TodoForm addItem={postItems} />
           </div>
-
           <div>
             <TodoList
               list={list}
@@ -193,6 +145,8 @@ export default function ToDo(props) {
           </div>
         </section>
       </main>
+      </SettingsProvider>
+      </AuthProvider>
     </>
   );
 }

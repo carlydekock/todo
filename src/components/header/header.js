@@ -3,6 +3,23 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthProvider.js';
+import useForm from '../../hooks/useForm.js';
+
+function If({ condition, children }) {
+  return condition ? children : null;
+}
+
+function Login() {
+
+  let context = useContext(AuthContext);
+  let [values, handleInputChange, handleSubmit] = useForm(handleLogin);
+
+  function handleLogin(userDetails) {
+    context.login(userDetails.username, userDetails.password);
+  }
+}
 
 
 export default function Header(props) {
@@ -32,3 +49,4 @@ export default function Header(props) {
     </header>
   )
 }
+
